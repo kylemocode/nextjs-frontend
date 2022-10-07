@@ -43,6 +43,8 @@ jobs:
       - uses: actions/cache@v2
         id: restore-build
         with:
-          path: ./*
+          path: |
+            ~/.npm
+            ${{ github.workspace }}/.next/cache
           key: ${{ runner.os }}-nextjs-${{ hashFiles('**/yarn.lock') }}-
       - run: yarn lint
