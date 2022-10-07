@@ -6,9 +6,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - run: npm install -g yarn
-      - run: yarn install --frozen-lockfile --check-files
-      - run: yarn build
       - name: Get yarn cache directory path
         id: yarn-cache-dir-path
         run: echo "::set-output name=dir::$(yarn cache dir)"
@@ -24,6 +21,9 @@ jobs:
         with:
           path: ./*
           key: ${{ github.sha }}
+      - run: npm install -g yarn
+      - run: yarn install --frozen-lockfile --check-files
+      - run: yarn build
 
   lint:
     runs-on: ubuntu-latest
