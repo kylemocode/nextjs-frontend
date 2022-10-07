@@ -29,14 +29,14 @@ jobs:
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-yarn-
-            - run: npm install -g yarn
-            - run: yarn install --frozen-lockfile --check-files
-            - run: yarn build
-            - uses: actions/cache@v2
-              id: cache-build
-              with:
-                path: ./*
-                key: ${{ github.sha }}
+          - run: npm install -g yarn
+          - run: yarn install --frozen-lockfile --check-files
+          - run: yarn build
+          - uses: actions/cache@v2
+            id: cache-build
+            with:
+              path: ./*
+              key: ${{ github.sha }}
 
   lint:
     runs-on: ubuntu-latest
