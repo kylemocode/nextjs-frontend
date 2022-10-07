@@ -21,6 +21,9 @@ jobs:
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-yarn-
+      - run: npm install -g yarn
+      - run: yarn install --frozen-lockfile --check-files
+      - run: yarn build
       - uses: actions/cache@v2
         with:
           path: |
@@ -31,9 +34,6 @@ jobs:
           # If source files changed but packages didn't, rebuild from a prior cache.
           restore-keys: |
             ${{ runner.os }}-nextjs-${{ hashFiles('**/yarn.lock') }}-
-      - run: npm install -g yarn
-      - run: yarn install --frozen-lockfile --check-files
-      - run: yarn build
 
   lint:
     runs-on: ubuntu-latest
